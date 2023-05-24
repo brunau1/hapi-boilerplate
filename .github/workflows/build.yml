@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  - push
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: '[BUILD] | Install Dependencies'
+        run: yarn install --frozen-lockfile
+        shell: bash
+
+      - name: '[BUILD] | Compile'
+        run: yarn compile
+        shell: bash
+
+      - name: '[TEST] | Lint Check'
+        run: yarn lint:check
+        shell: bash
